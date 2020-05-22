@@ -5,10 +5,7 @@
 		if (deleteJabatan($id_jabatan) > 0) {
 			setAlert("Jabatan has been deleted", "Successfully deleted", "success");
 		    header("Location: jabatan.php");
-	    } else {
-		    setAlert("Jabatan failed to delete!", "Failed delete!", "error");
-		    header("Location: jabatan.php");
-		}
+	    }
 	} else {
 	   header("Location: jabatan.php");
 	}

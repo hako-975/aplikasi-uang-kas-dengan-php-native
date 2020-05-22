@@ -6,18 +6,12 @@
     if (editJabatan($_POST) > 0) {
       setAlert("Jabatan has been changed", "Successfully changed", "success");
       header("Location: jabatan.php");
-    } else {
-      setAlert("Jabatan failed to change!", "Failed change!", "error");
-      header("Location: jabatan.php");
     }
   }
 
   if (isset($_POST['btnTambahJabatan'])) {
     if (addJabatan($_POST) > 0) {
       setAlert("Jabatan has been added", "Successfully added", "success");
-      header("Location: jabatan.php");
-    } else {
-      setAlert("Jabatan failed to add!", "Failed add!", "error");
       header("Location: jabatan.php");
     }
   }

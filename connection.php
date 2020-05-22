@@ -78,7 +78,7 @@ if (isset($_SESSION['id_user'])) {
 
 function editUser($data) {
 	global $conn;
-	$id_user = htmlspecialchars($_SESSION['id_user']);
+	$id_user = htmlspecialchars($data['id_user']);
 	$nama_lengkap = htmlspecialchars(addslashes($data['nama_lengkap']));
   	$username = htmlspecialchars($data['username']);
   	$id_jabatan = htmlspecialchars($data['id_jabatan']);
@@ -99,7 +99,7 @@ function checkJabatan() {
 	$id_jabatan = $_SESSION['id_jabatan'];
 	if ($id_jabatan !== '1') {
 		setAlert("Access Denied!", "You cannot delete data except administrator!", "error");
-     	header("Location: index.php");;
+     	header("Location: index.php");
 	} else {
 		return true;
 	}
@@ -118,4 +118,36 @@ function addJabatan($data) {
 	$nama_jabatan = htmlspecialchars($data['nama_jabatan']);
 	$query = mysqli_query($conn, "INSERT INTO jabatan VALUES ('', '$nama_jabatan')");
   	return mysqli_affected_rows($conn);
+}
+
+function addUser($data) {
+	global $conn;
+	// check username already used or not
+	$username = htmlspecialchars($data['username']);
+	$query = mysqli_query($conn, "SELECT * FROM user WHERE username = '$username'");
+	if (mysqli_fetch_assoc($query)) {
+		setAlert("Failed to add user!", "Username has been used!", "error");
+     	return header("Location: user.php");
+	} else {
+		$password = htmlspecialchars($data['password']);
+		$password_verify = htmlspecialchars($data['password_verify']);
+		if ($password !== $password_verify) {
+			setAlert("Failed to add user!", "password not same password verify!", "error");
+	     	return header("Location: user.php");
+		} else {
+			$password = password_hash($password, PASSWORD_DEFAULT);
+			$nama_lengkap = htmlspecialchars($data['nama_lengkap']);
+			$id_jabatan = htmlspecialchars($data['id_jabatan']);
+			$query = mysqli_query($conn, "INSERT INTO user VALUES ('', '$nama_lengkap', '$username', '$password', '$id_jabatan')");
+		  	return mysqli_affected_rows($conn);
+		}
+	}
+}
+
+function deleteUser($id) {
+	global $conn;
+	if (checkJabatan() == true) {
+		$query = mysqli_query($conn, "DELETE FROM user WHERE id_user = '$id'");
+	  	return mysqli_affected_rows($conn);
+	}
 }

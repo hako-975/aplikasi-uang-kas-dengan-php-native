@@ -60,6 +60,7 @@
 		<div class="modal fade" id="editProfileModal" tabindex="-1" role="dialog" aria-labelledby="editProfileModalLabel" aria-hidden="true">
 		  <div class="modal-dialog" role="document">
 		    <form method="post">
+                <input type="hidden" name="id_user" value="<?= $dataUser['id_user']; ?>">
 		    	<div class="modal-content">
 			      <div class="modal-header">
 			        <h5 class="modal-title" id="editProfileModalLabel">Edit Profile</h5>
