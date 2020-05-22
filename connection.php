@@ -67,3 +67,21 @@ function logout() {
 	setAlert("You has been logout!", "Success Logout!", "success");
 	header("Location: login.php");
 }
+
+if (isset($_SESSION['id_user'])) {
+	function dataUser() {
+		global $conn;
+		$id_user = $_SESSION['id_user'];
+		return mysqli_fetch_assoc(mysqli_query($conn, "SELECT * FROM user INNER JOIN jabatan ON user.id_jabatan = jabatan.id_jabatan WHERE id_user = '$id_user'"));
+	}
+}
+
+function editUser($data) {
+	global $conn;
+	$id_user = htmlspecialchars($_SESSION['id_user']);
+	$nama_lengkap = htmlspecialchars(addslashes($data['nama_lengkap']));
+  	$username = htmlspecialchars($data['username']);
+  	$id_jabatan = htmlspecialchars($data['id_jabatan']);
+  	$query = mysqli_query($conn, "UPDATE user SET nama_lengkap = '$nama_lengkap', username = '$username', id_jabatan = '$id_jabatan' WHERE id_user = '$id_user'");
+  	return mysqli_affected_rows($conn);
+}
