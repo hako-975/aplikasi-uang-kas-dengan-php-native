@@ -85,3 +85,12 @@ function editUser($data) {
   	$query = mysqli_query($conn, "UPDATE user SET nama_lengkap = '$nama_lengkap', username = '$username', id_jabatan = '$id_jabatan' WHERE id_user = '$id_user'");
   	return mysqli_affected_rows($conn);
 }
+
+
+function editJabatan($data) {
+	global $conn;
+	$id_jabatan = htmlspecialchars($data['id_jabatan']);
+  	$nama_jabatan = htmlspecialchars($data['nama_jabatan']);
+  	$query = mysqli_query($conn, "UPDATE jabatan SET nama_jabatan = '$nama_jabatan' WHERE id_jabatan = '$id_jabatan'");
+  	return mysqli_affected_rows($conn);
+}

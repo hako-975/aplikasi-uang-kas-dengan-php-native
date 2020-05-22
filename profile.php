@@ -1,7 +1,6 @@
 <?php 
   require 'connection.php';
   checkLogin();
-  $dataUser = dataUser();
   $jabatan = mysqli_query($conn, "SELECT * FROM jabatan");
 
   if (isset($_POST['btnEditProfile'])) {
@@ -9,7 +8,7 @@
   		setAlert("Your Profile has been changed", "Successfully changed", "success");
 		header("Location: profile.php");
   	} else {
-  		setAlert("Your Profile failed to change", "Failed changed", "error");
+  		setAlert("Your Profile failed to change!", "Failed changed!", "error");
 		header("Location: profile.php");
   	}
   }
