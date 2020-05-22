@@ -55,20 +55,19 @@
             <p>
               Master Data
               <i class="fas fa-angle-left right"></i>
-              <span class="badge badge-info right">6</span>
             </p>
           </a>
           <ul class="nav nav-treeview">
             <li class="nav-item">
-              <a href="pages/layout/top-nav.html" class="nav-link">
-                <i class="far fa-circle nav-icon"></i>
-                <p>Top Navigation</p>
+              <a href="siswa.php" class="nav-link">
+                <i class="fas fa-user-tie nav-icon"></i>
+                <p>Siswa</p>
               </a>
             </li>
             <li class="nav-item">
               <a href="pages/layout/top-nav-sidebar.html" class="nav-link">
                 <i class="far fa-circle nav-icon"></i>
-                <p>Top Navigation + Sidebar</p>
+                <p>Top Navigation </p>
               </a>
             </li>
           </ul>

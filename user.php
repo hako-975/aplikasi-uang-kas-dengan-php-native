@@ -123,7 +123,7 @@
                       <td><?= $du['nama_lengkap']; ?></td>
                       <td><?= $du['nama_jabatan']; ?></td>
                       <td>
-                        <?php if ($du['id_user'] !== '1'): ?>
+                        <?php if ($du['id_jabatan'] !== '1'): ?>
                           <!-- Button trigger modal -->
                           <a href="ubah_user.php?id_user=<?= $du['id_user']; ?>" class="badge badge-success" data-toggle="modal" data-target="#editUserModal<?= $du['id_user']; ?>">
                             <i class="fas fa-fw fa-edit"></i> Ubah

@@ -151,3 +151,32 @@ function deleteUser($id) {
 	  	return mysqli_affected_rows($conn);
 	}
 }
+
+function addSiswa($data) {
+	global $conn;
+	$nama_siswa = htmlspecialchars($data['nama_siswa']);
+	$jenis_kelamin = htmlspecialchars($data['jenis_kelamin']);
+	$no_telepon = htmlspecialchars($data['no_telepon']);
+	$email = htmlspecialchars($data['email']);
+	$query = mysqli_query($conn, "INSERT INTO siswa VALUES ('', '$nama_siswa', '$jenis_kelamin', '$no_telepon', '$email')");
+  	return mysqli_affected_rows($conn);
+}
+
+function deleteSiswa($id) {
+	global $conn;
+	if (checkJabatan() == true) {
+		$query = mysqli_query($conn, "DELETE FROM siswa WHERE id_siswa = '$id'");
+	  	return mysqli_affected_rows($conn);
+	}
+}
+
+function editSiswa($data) {
+	global $conn;
+	$id_siswa = htmlspecialchars($data['id_siswa']);
+	$nama_siswa = htmlspecialchars($data['nama_siswa']);
+	$jenis_kelamin = htmlspecialchars($data['jenis_kelamin']);
+	$no_telepon = htmlspecialchars($data['no_telepon']);
+	$email = htmlspecialchars($data['email']);
+	$query = mysqli_query($conn, "UPDATE siswa SET nama_siswa = '$nama_siswa', jenis_kelamin = '$jenis_kelamin', no_telepon = '$no_telepon', email = '$email' WHERE id_siswa = '$id_siswa'");
+  	return mysqli_affected_rows($conn);
+}

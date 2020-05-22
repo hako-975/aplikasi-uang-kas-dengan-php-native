@@ -42,12 +42,12 @@
           <div class="col-sm text-right">
             <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#tambahJabatanModal"><i class="fas fa-fw fa-plus"></i> Tambah Jabatan</button>
             <!-- Modal -->
-            <div class="modal fade text-left" id="tambahjabatanModal" tabindex="-1" role="dialog" aria-labelledby="tambahjabatanModalLabel" aria-hidden="true">
+            <div class="modal fade text-left" id="tambahJabatanModal" tabindex="-1" role="dialog" aria-labelledby="tambahJabatanModalLabel" aria-hidden="true">
               <div class="modal-dialog" role="document">
                 <form method="post">
                   <div class="modal-content">
                     <div class="modal-header">
-                      <h5 class="modal-title" id="tambahjabatanModalLabel">Tambah Jabatan</h5>
+                      <h5 class="modal-title" id="tambahJabatanModalLabel">Tambah Jabatan</h5>
                       <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                       </button>
@@ -55,7 +55,7 @@
                     <div class="modal-body">
                       <div class="form-group">
                         <label for="nama_jabatan">Nama Jabatan</label>
-                        <input type="text" name="nama_jabatan" class="form-control" required>
+                        <input type="text" name="nama_jabatan" id="nama_jabatan" class="form-control" required>
                       </div>
                     </div>
                     <div class="modal-footer">
