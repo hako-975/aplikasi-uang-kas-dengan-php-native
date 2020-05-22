@@ -94,3 +94,28 @@ function editJabatan($data) {
   	$query = mysqli_query($conn, "UPDATE jabatan SET nama_jabatan = '$nama_jabatan' WHERE id_jabatan = '$id_jabatan'");
   	return mysqli_affected_rows($conn);
 }
+
+function checkJabatan() {
+	$id_jabatan = $_SESSION['id_jabatan'];
+	if ($id_jabatan !== '1') {
+		setAlert("Access Denied!", "You cannot delete data except administrator!", "error");
+     	header("Location: index.php");;
+	} else {
+		return true;
+	}
+}
+
+function deleteJabatan($id) {
+	global $conn;
+	if (checkJabatan() == true) {
+		$query = mysqli_query($conn, "DELETE FROM jabatan WHERE id_jabatan = '$id'");
+	  	return mysqli_affected_rows($conn);
+	}
+}
+
+function addJabatan($data) {
+	global $conn;
+	$nama_jabatan = htmlspecialchars($data['nama_jabatan']);
+	$query = mysqli_query($conn, "INSERT INTO jabatan VALUES ('', '$nama_jabatan')");
+  	return mysqli_affected_rows($conn);
+}

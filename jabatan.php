@@ -5,10 +5,20 @@
   if (isset($_POST['btnEditJabatan'])) {
     if (editJabatan($_POST) > 0) {
       setAlert("Jabatan has been changed", "Successfully changed", "success");
-    header("Location: jabatan.php");
+      header("Location: jabatan.php");
     } else {
-      setAlert("Jabatan failed to change!", "Failed changed!", "error");
-    header("Location: jabatan.php");
+      setAlert("Jabatan failed to change!", "Failed change!", "error");
+      header("Location: jabatan.php");
+    }
+  }
+
+  if (isset($_POST['btnTambahJabatan'])) {
+    if (addJabatan($_POST) > 0) {
+      setAlert("Jabatan has been added", "Successfully added", "success");
+      header("Location: jabatan.php");
+    } else {
+      setAlert("Jabatan failed to add!", "Failed add!", "error");
+      header("Location: jabatan.php");
     }
   }
 ?>
@@ -31,9 +41,37 @@
     <!-- Content Header (Page header) -->
     <div class="content-header">
       <div class="container-fluid">
-        <div class="row mb-2">
-          <div class="col-sm">
+        <div class="row justify-content-center mb-2">
+          <div class="col-sm text-left">
             <h1 class="m-0 text-dark">Jabatan</h1>
+          </div><!-- /.col -->
+          <div class="col-sm text-right">
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#tambahJabatanModal"><i class="fas fa-fw fa-plus"></i> Tambah Jabatan</button>
+            <!-- Modal -->
+            <div class="modal fade text-left" id="tambahjabatanModal" tabindex="-1" role="dialog" aria-labelledby="tambahjabatanModalLabel" aria-hidden="true">
+              <div class="modal-dialog" role="document">
+                <form method="post">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="tambahjabatanModalLabel">Tambah Jabatan</h5>
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                    <div class="modal-body">
+                      <div class="form-group">
+                        <label for="nama_jabatan">Nama Jabatan</label>
+                        <input type="text" name="nama_jabatan" class="form-control" required>
+                      </div>
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fas fa-fw fa-times"></i> Close</button>
+                      <button type="submit" class="btn btn-primary" name="btnTambahJabatan"><i class="fas fa-fw fa-save"></i> Save</button>
+                    </div>
+                  </div>
+                </form>
+              </div>
+            </div>
           </div><!-- /.col -->
         </div><!-- /.row -->
       </div><!-- /.container-fluid -->
@@ -92,7 +130,7 @@
                               </form>
                             </div>
                           </div>
-                          <a class="badge badge-danger" href="hapus_jabatan.php?id_jabatan=<?= $dj['id_jabatan']; ?>"><i class="fas fa-fw fa-trash"></i> Hapus</a>
+                          <a data-nama="<?= $dj['nama_jabatan']; ?>" class="btn-delete badge badge-danger" href="hapus_jabatan.php?id_jabatan=<?= $dj['id_jabatan']; ?>"><i class="fas fa-fw fa-trash"></i> Hapus</a>
                         <?php endif ?>
                       </td>
                     </tr>
