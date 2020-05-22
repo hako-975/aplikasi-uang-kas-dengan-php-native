@@ -1,7 +1,7 @@
 <?php 
   require 'connection.php';
   checkLogin();
-  $siswa = mysqli_query($conn, "SELECT * FROM siswa");
+  $siswa = mysqli_query($conn, "SELECT * FROM siswa ORDER BY nama_siswa ASC");
   if (isset($_POST['btnEditSiswa'])) {
     if (editSiswa($_POST) > 0) {
       setAlert("Siswa has been changed", "Successfully changed", "success");

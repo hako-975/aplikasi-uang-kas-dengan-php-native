@@ -2,6 +2,8 @@
 	include 'include/js.php';
 	
 	session_start();
+	
+	date_default_timezone_set("Asia/Jakarta");
 
 	$host		= "localhost";
 	$username	= "root";
@@ -179,4 +181,85 @@ function editSiswa($data) {
 	$email = htmlspecialchars($data['email']);
 	$query = mysqli_query($conn, "UPDATE siswa SET nama_siswa = '$nama_siswa', jenis_kelamin = '$jenis_kelamin', no_telepon = '$no_telepon', email = '$email' WHERE id_siswa = '$id_siswa'");
   	return mysqli_affected_rows($conn);
+}
+
+function addBulanPembayaran($data) {
+	global $conn;
+	$nama_bulan = htmlspecialchars($data['nama_bulan']);
+	$tahun = htmlspecialchars($data['tahun']);
+	$pembayaran_perminggu = htmlspecialchars($data['pembayaran_perminggu']);
+	// check the month has been used or NOT
+	$check_bulan = mysqli_query($conn, "SELECT * FROM bulan_pembayaran WHERE nama_bulan = '$nama_bulan' AND tahun = '$tahun'");
+	if (mysqli_fetch_assoc($check_bulan)) {
+		setAlert("Failed to added " . ucwords($nama_bulan) . "!", "Because the " . ucwords($nama_bulan) . " has been used!", "error");
+     	return header("Location: uang_kas.php");
+	} else {
+		$query = mysqli_query($conn, "INSERT INTO bulan_pembayaran VALUES ('', '$nama_bulan', '$tahun', '$pembayaran_perminggu')");
+		$id_bulan_pembayaran = mysqli_insert_id($conn);
+
+		$dataSiswa = mysqli_query($conn, "SELECT * FROM siswa");
+		$siswa = "INSERT INTO uang_kas (id_siswa, id_bulan_pembayaran, minggu_ke_1, minggu_ke_2, minggu_ke_3, minggu_ke_4) VALUES ";
+		foreach ($dataSiswa as $ds) {
+		 	$siswa .= "('{$ds['id_siswa']}','{$id_bulan_pembayaran}','','','','')";
+            $siswa .= ",";
+		}
+		$siswa = rtrim($siswa,",");
+		$query_siswa = mysqli_query($conn, $siswa);
+	  	return mysqli_affected_rows($conn);
+	}
+}
+
+function editBulanPembayaran($data) {
+	global $conn;
+	$id_bulan_pembayaran = htmlspecialchars($data['id_bulan_pembayaran']);
+	$nama_bulan = htmlspecialchars($data['nama_bulan']);
+	$tahun = htmlspecialchars($data['tahun']);
+	$pembayaran_perminggu = htmlspecialchars($data['pembayaran_perminggu']);
+	$query = mysqli_query($conn, "UPDATE bulan_pembayaran SET nama_bulan = '$nama_bulan', tahun = '$tahun', pembayaran_perminggu = '$pembayaran_perminggu' WHERE id_bulan_pembayaran = '$id_bulan_pembayaran'");
+  	return mysqli_affected_rows($conn);
+}
+
+function riwayat($id_user, $id_uang_kas, $aksi) {
+	global $conn;
+	$tanggal = time();
+	return mysqli_query($conn, "INSERT INTO riwayat VALUES ('', '$id_user', '$id_uang_kas', '$aksi', '$tanggal')");
+}
+
+function editPembayaranUangKas($data) {
+	global $conn;
+	$id_uang_kas = htmlspecialchars($data['id_uang_kas']);
+	$id_user = $_SESSION['id_user'];
+	if (isset($_POST['minggu_ke_1'])) {
+		$uang_sebelum = htmlspecialchars($data['uang_sebelum']);
+		$minggu_ke_1 = htmlspecialchars($_POST['minggu_ke_1']);
+		$query = mysqli_query($conn, "UPDATE uang_kas SET minggu_ke_1 = '$minggu_ke_1' WHERE id_uang_kas = '$id_uang_kas'");
+  		riwayat($id_user, $id_uang_kas, "telah mengubah pembayaran minggu ke-1 dari Rp. " . number_format($uang_sebelum) . " menjadi Rp. " . number_format($minggu_ke_1));
+  		return mysqli_affected_rows($conn);
+	} elseif (isset($_POST['minggu_ke_2'])) {
+		$uang_sebelum = htmlspecialchars($data['uang_sebelum']);
+		$minggu_ke_2 = htmlspecialchars($_POST['minggu_ke_2']);
+		$query = mysqli_query($conn, "UPDATE uang_kas SET minggu_ke_2 = '$minggu_ke_2' WHERE id_uang_kas = '$id_uang_kas'");
+  		riwayat($id_user, $id_uang_kas, "telah mengubah pembayaran minggu ke-2 dari Rp. " . number_format($uang_sebelum) . " menjadi Rp. " . number_format($minggu_ke_2));
+  		return mysqli_affected_rows($conn);
+	} elseif (isset($_POST['minggu_ke_3'])) {
+		$uang_sebelum = htmlspecialchars($data['uang_sebelum']);
+		$minggu_ke_3 = htmlspecialchars($_POST['minggu_ke_3']);
+		$query = mysqli_query($conn, "UPDATE uang_kas SET minggu_ke_3 = '$minggu_ke_3' WHERE id_uang_kas = '$id_uang_kas'");
+  		riwayat($id_user, $id_uang_kas, "telah mengubah pembayaran minggu ke-3 dari Rp. " . number_format($uang_sebelum) . " menjadi Rp. " . number_format($minggu_ke_3));
+  		return mysqli_affected_rows($conn);
+	} elseif (isset($_POST['minggu_ke_4'])) {
+		$uang_sebelum = htmlspecialchars($data['uang_sebelum']);
+		$minggu_ke_4 = htmlspecialchars($_POST['minggu_ke_4']);
+		$query = mysqli_query($conn, "UPDATE uang_kas SET minggu_ke_4 = '$minggu_ke_4' WHERE id_uang_kas = '$id_uang_kas'");
+  		riwayat($id_user, $id_uang_kas, "telah mengubah pembayaran minggu ke-4 dari Rp. " . number_format($uang_sebelum) . " menjadi Rp. " . number_format($minggu_ke_4));
+  		return mysqli_affected_rows($conn);
+	}
+}
+
+function deleteBulanPembayaran($id) {
+	global $conn;
+	if (checkJabatan() == true) {
+		$query = mysqli_query($conn, "DELETE FROM bulan_pembayaran WHERE id_bulan_pembayaran = '$id'");
+	  	return mysqli_affected_rows($conn);
+	}
 }

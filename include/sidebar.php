@@ -49,28 +49,24 @@
             </a>
           </li>
         <?php endif ?>
-        <li class="nav-item has-treeview">
-          <a href="#" class="nav-link">
-            <i class="nav-icon fas fa-copy"></i>
-            <p>
-              Master Data
-              <i class="fas fa-angle-left right"></i>
-            </p>
+        <li class="nav-item">
+          <a href="siswa.php" class="nav-link">
+            <i class="fas fa-user-tie nav-icon"></i>
+            <p>Siswa</p>
           </a>
-          <ul class="nav nav-treeview">
-            <li class="nav-item">
-              <a href="siswa.php" class="nav-link">
-                <i class="fas fa-user-tie nav-icon"></i>
-                <p>Siswa</p>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a href="pages/layout/top-nav-sidebar.html" class="nav-link">
-                <i class="far fa-circle nav-icon"></i>
-                <p>Top Navigation </p>
-              </a>
-            </li>
-          </ul>
+        </li>
+        <li class="nav-item">
+          <a href="uang_kas.php" class="nav-link">
+            <i class="fas fa-dollar-sign nav-icon"></i>
+            <p>Uang Kas</p>
+          </a>
+        </li>
+        <div class="dropdown-divider"></div>
+        <li class="nav-item">
+          <a href="riwayat.php" class="nav-link">
+            <i class="fas fa-stopwatch nav-icon"></i>
+            <p>Riwayat Uang Kas</p>
+          </a>
         </li>
       </ul>
     </nav>
