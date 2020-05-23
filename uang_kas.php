@@ -115,7 +115,7 @@
                   <h6 class="text-muted"><?= $dbp['tahun']; ?></h6>
                   <h6>Rp. <?= number_format($dbp['pembayaran_perminggu']); ?> / minggu</h6>
                   <a href="detail_bulan_pembayaran.php?id_bulan_pembayaran=<?= $dbp['id_bulan_pembayaran']; ?>" class="btn btn-info"><i class="fas fa-fw fa-align-justify"></i></a>
-                  <button type="button" data-toggle="modal" data-target="#editBulanPembayaranModal<?= $dbp['id_bulan_pembayaran']; ?>" class="btn btn-success"><i class="fas fa-fw fa-edit"></i></button>
+                  <!-- <button type="button" data-toggle="modal" data-target="#editBulanPembayaranModal<?= $dbp['id_bulan_pembayaran']; ?>" class="btn btn-success"><i class="fas fa-fw fa-edit"></i></button> -->
                   <!-- Modal -->
                   <div class="modal fade" id="editBulanPembayaranModal<?= $dbp['id_bulan_pembayaran']; ?>" tabindex="-1" role="dialog" aria-labelledby="editBulanPembayaranModalLabel<?= $dbp['id_bulan_pembayaran']; ?>" aria-hidden="true">
                     <div class="modal-dialog" role="document">
