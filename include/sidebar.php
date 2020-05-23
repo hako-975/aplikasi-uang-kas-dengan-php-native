@@ -34,7 +34,7 @@
         <?php if ($dataUser['id_jabatan'] == '1'): ?>
           <li class="nav-item">
             <a href="jabatan.php" class="nav-link">
-              <i class="nav-icon fas fa-users"></i>
+              <i class="nav-icon fas fa-cog"></i>
               <p>
                 Jabatan
               </p>

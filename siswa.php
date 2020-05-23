@@ -15,6 +15,16 @@
       header("Location: siswa.php");
     }
   }
+  if (isset($_GET['toggle_modal'])) {
+    $toggle_modal = $_GET['toggle_modal'];
+    echo "
+    <script>
+      $(document).ready(function() {
+        $('#$toggle_modal').modal('show');
+      });
+    </script>
+    ";
+  }
 ?>
 
 <!DOCTYPE html>

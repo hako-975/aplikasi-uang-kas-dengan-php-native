@@ -263,3 +263,34 @@ function deleteBulanPembayaran($id) {
 	  	return mysqli_affected_rows($conn);
 	}
 }
+
+function changePassword($data) {
+	global $conn;
+	$id_user = $_SESSION['id_user'];
+	$old_password = htmlspecialchars($data['old_password']);
+	// check old password
+	$dataUser = mysqli_fetch_assoc(mysqli_query($conn, "SELECT * FROM user WHERE id_user = '$id_user'"));
+	if (password_verify($old_password, $dataUser['password'])) {
+		$new_password = htmlspecialchars($data['new_password']);
+		$new_password_verify = htmlspecialchars($data['new_password_verify']);
+		if ($new_password == $new_password_verify) {
+			$password = password_hash($new_password, PASSWORD_DEFAULT);
+			$query = mysqli_query($conn, "UPDATE user SET password = '$password' WHERE id_user = '$id_user'");
+	  		return mysqli_affected_rows($conn);
+		} else {
+			setAlert("Failed to change password user!", "New Password not Matches with New Password Verify!", "error");
+	     	return header("Location: profile.php");
+		}
+	} else {
+		setAlert("Failed to change password user!", "Old Password not Matches!", "error");
+     	return header("Location: profile.php");
+	}
+}
+
+function tambahSiswaUangKas($data) {
+	global $conn;
+	$id_siswa = htmlspecialchars($data['id_siswa']);
+	$id_bulan_pembayaran = htmlspecialchars($data['id_bulan_pembayaran']);
+	$query = mysqli_query($conn, "INSERT INTO uang_kas VALUES ('', '$id_siswa', '$id_bulan_pembayaran', '0', '0', '0', '0')");
+  	return mysqli_affected_rows($conn);
+}

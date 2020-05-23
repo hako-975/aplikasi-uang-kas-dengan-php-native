@@ -7,8 +7,12 @@
   	if (editUser($_POST) > 0) {
   		setAlert("Your Profile has been changed", "Successfully changed", "success");
 		header("Location: profile.php");
-  	} else {
-  		setAlert("Your Profile failed to change!", "Failed changed!", "error");
+  	} 
+  }
+
+  if (isset($_POST['btnChangePassword'])) {
+  	if (changePassword($_POST) > 0) {
+  		setAlert("Your Password has been changed", "Successfully changed", "success");
 		header("Location: profile.php");
   	}
   }
@@ -52,10 +56,14 @@
 		  </ul>
 		</div>
 		<!-- Button trigger modal -->
-		<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#editProfileModal">
+		<button type="button" class="btn btn-success" data-toggle="modal" data-target="#editProfileModal">
 		  <i class="fas fa-fw fa-edit"></i> Edit
 		</button>
-
+		
+		<button type="button" class="btn btn-danger" data-toggle="modal" data-target="#changePasswordModal">
+		  <i class="fas fa-fw fa-lock"></i> Change Password
+		</button>
+	
 		<!-- Modal -->
 		<div class="modal fade" id="editProfileModal" tabindex="-1" role="dialog" aria-labelledby="editProfileModalLabel" aria-hidden="true">
 		  <div class="modal-dialog" role="document">
@@ -95,6 +103,40 @@
 			      <div class="modal-footer">
 			        <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fas fa-fw fa-times"></i> Close</button>
 			        <button type="submit" name="btnEditProfile" class="btn btn-primary"><i class="fas fa-fw fa-save"></i> Save</button>
+			      </div>
+			    </div>
+		    </form>
+		  </div>
+		</div>
+		<!-- Modal change password -->
+		<div class="modal fade" id="changePasswordModal" tabindex="-1" role="dialog" aria-labelledby="changePasswordModalLabel" aria-hidden="true">
+		  <div class="modal-dialog" role="document">
+		    <form method="post">
+                <input type="hidden" name="id_user" value="<?= $dataUser['id_user']; ?>">
+		    	<div class="modal-content">
+			      <div class="modal-header">
+			        <h5 class="modal-title" id="changePasswordModalLabel">Change Password</h5>
+			        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+			          <span aria-hidden="true">&times;</span>
+			        </button>
+			      </div>
+			      <div class="modal-body">
+					<div class="form-group">
+                        <label for="old_password">Old Password</label>
+                        <input type="password" minlength="6" name="old_password" id="old_password" class="form-control" required>
+                    </div>
+					<div class="form-group">
+                        <label for="new_password">Password</label>
+                        <input type="password" minlength="6" name="new_password" id="new_password" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="new_password_verify">Password Verify</label>
+                        <input type="password" minlength="6" name="new_password_verify" id="new_password_verify" class="form-control" required>
+                    </div>
+			      </div>
+			      <div class="modal-footer">
+			        <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fas fa-fw fa-times"></i> Close</button>
+			        <button type="submit" name="btnChangePassword" class="btn btn-primary"><i class="fas fa-fw fa-save"></i> Save</button>
 			      </div>
 			    </div>
 		    </form>
