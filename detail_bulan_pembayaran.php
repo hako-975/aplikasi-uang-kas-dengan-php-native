@@ -76,7 +76,11 @@
                   <td><?= $i++; ?></td>
                   <td><?= $duk['nama_siswa']; ?></td>
                   <?php if ($duk['minggu_ke_1'] == $duk['pembayaran_perminggu']): ?>
-                    <td><a href="" data-toggle="modal" data-target="#editMingguKe1<?= $duk['id_uang_kas']; ?>" class="badge badge-success"><i class="fas fa-fw fa-check"></i> Sudah bayar</a></td>
+                    <?php if ($duk['minggu_ke_2'] !== "0"): ?>
+                      <td><button class="badge badge-success" data-toggle="tooltip" data-placement="top" title="Tidak bisa mengubah minggu ke 1, jika minggu ke 2 dan seterusnya sudah lunas, jika ingin mengubah, ubahlah minggu ke 2 atau ke 3 atau ke 4 terlebih dahulu menjadi 0."><i class="fas fa-fw fa-check"></i> Sudah bayar</button></td>
+                    <?php else: ?>
+                      <td><a href="" data-toggle="modal" data-target="#editMingguKe1<?= $duk['id_uang_kas']; ?>" class="badge badge-success"><i class="fas fa-fw fa-check"></i> Sudah bayar</a></td>
+                    <?php endif ?>
                   <?php else: ?>
                     <td><a href="" data-toggle="modal" data-target="#editMingguKe1<?= $duk['id_uang_kas']; ?>" class="badge badge-danger"><?= $duk['minggu_ke_1']; ?></a></td>
                   <?php endif ?>
@@ -86,7 +90,11 @@
                     <td><---</td>
                   <?php else: ?>
                     <?php if ($duk['minggu_ke_2'] == $duk['pembayaran_perminggu']): ?>
+                    <?php if ($duk['minggu_ke_3'] !== "0"): ?>
+                      <td><button class="badge badge-success" data-toggle="tooltip" data-placement="top" title="Tidak bisa mengubah minggu ke 2, jika minggu ke 3 dan seterusnya sudah lunas, jika ingin mengubah, ubahlah minggu ke 3 atau ke 4 terlebih dahulu menjadi 0."><i class="fas fa-fw fa-check"></i> Sudah bayar</button></td>
+                    <?php else: ?>
                       <td><a href="" data-toggle="modal" data-target="#editMingguKe2<?= $duk['id_uang_kas']; ?>" class="badge badge-success"><i class="fas fa-fw fa-check"></i> Sudah bayar</a></td>
+                    <?php endif ?>
                     <?php else: ?>
                       <td><a href="" data-toggle="modal" data-target="#editMingguKe2<?= $duk['id_uang_kas']; ?>" class="badge badge-danger"><?= $duk['minggu_ke_2']; ?></a></td>
                     <?php endif ?>
@@ -95,7 +103,11 @@
                       <td><---</td>
                     <?php else: ?>
                       <?php if ($duk['minggu_ke_3'] == $duk['pembayaran_perminggu']): ?>
-                        <td><a href="" data-toggle="modal" data-target="#editMingguKe3<?= $duk['id_uang_kas']; ?>" class="badge badge-success"><i class="fas fa-fw fa-check"></i> Sudah bayar</a></td>
+                        <?php if ($duk['minggu_ke_4'] !== "0"): ?>
+                          <td><button class="badge badge-success" data-toggle="tooltip" data-placement="top" title="Tidak bisa mengubah minggu ke 3, jika minggu ke 4 sudah lunas, jika ingin mengubah, ubahlah minggu ke 4 terlebih dahulu menjadi 0."><i class="fas fa-fw fa-check"></i> Sudah bayar</button></td>
+                        <?php else: ?>
+                          <td><a href="" data-toggle="modal" data-target="#editMingguKe3<?= $duk['id_uang_kas']; ?>" class="badge badge-success"><i class="fas fa-fw fa-check"></i> Sudah bayar</a></td>
+                        <?php endif ?>
                       <?php else: ?>
                         <td><a href="" data-toggle="modal" data-target="#editMingguKe3<?= $duk['id_uang_kas']; ?>" class="badge badge-danger"><?= $duk['minggu_ke_3']; ?></a></td>
                       <?php endif ?>

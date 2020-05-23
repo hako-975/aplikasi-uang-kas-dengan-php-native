@@ -88,17 +88,9 @@
 			        </div>
 			        <div class="form-group">
 			        	<label for="id_jabatan">Jabatan</label>
-		        		<?php if ($dataUser['id_jabatan'] == '1'): ?>
-		        			<input type="hidden" name="id_jabatan" id="id_jabatan" value="<?= $dataUser['id_jabatan']; ?>">
-				        	<input style="cursor: not-allowed;" disabled type="text" class="form-control" required value="<?= $dataUser['nama_jabatan']; ?>">
-	        			<?php else: ?>
-				        	<select name="id_jabatan" id="id_jabatan" class="form-control">
-			        			<?php foreach ($jabatan as $dj): ?>
-					        		<option value="<?= $dj['id_jabatan']; ?>"><?= $dj['nama_jabatan']; ?></option>
-				        		<?php endforeach ?>
-				        	</select>
-		        		<?php endif ?>
-			        </div>
+	        			<input type="hidden" name="id_jabatan" id="id_jabatan" value="<?= $dataUser['id_jabatan']; ?>">
+			        	<input style="cursor: not-allowed;" disabled type="text" class="form-control" required value="<?= $dataUser['nama_jabatan']; ?>">
+		     		</div>
 			      </div>
 			      <div class="modal-footer">
 			        <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fas fa-fw fa-times"></i> Close</button>

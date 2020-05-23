@@ -170,7 +170,9 @@
                             </form>
                           </div>
                         </div>
-                        <a data-nama="<?= $ds['nama_siswa']; ?>" class="btn-delete badge badge-danger" href="hapus_siswa.php?id_siswa=<?= $ds['id_siswa']; ?>"><i class="fas fa-fw fa-trash"></i> Hapus</a>
+                        <?php if ($_SESSION['id_jabatan'] == '1'): ?>
+                          <a data-nama="<?= $ds['nama_siswa']; ?>" class="btn-delete badge badge-danger" href="hapus_siswa.php?id_siswa=<?= $ds['id_siswa']; ?>"><i class="fas fa-fw fa-trash"></i> Hapus</a>
+                        <?php endif ?>
                       </td>
                     </tr>
                   <?php endforeach ?>

@@ -158,8 +158,9 @@
                       </form>
                     </div>
                   </div>
-
-                  <a href="hapus_bulan_pembayaran.php?id_bulan_pembayaran=<?= $dbp['id_bulan_pembayaran']; ?>" class="btn btn-danger btn-delete" data-nama="<?= ucwords($dbp['nama_bulan']); ?>"><i class="fas fa-fw fa-trash"></i></a>
+                  <?php if ($_SESSION['id_jabatan'] == '1'): ?>
+                    <a href="hapus_bulan_pembayaran.php?id_bulan_pembayaran=<?= $dbp['id_bulan_pembayaran']; ?>" class="btn btn-danger btn-delete" data-nama="<?= ucwords($dbp['nama_bulan']); ?>"><i class="fas fa-fw fa-trash"></i></a>
+                  <?php endif ?>
                 </div>
               </div>
             </div>

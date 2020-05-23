@@ -148,7 +148,7 @@
                                     </div>
                                     <div class="form-group">
                                       <label for="nama_lengkap<?= $du['id_user']; ?>">Nama Lengkap</label>
-                                      <input type="text" name="nama_lengkap" id="nama_lengkap<?= $du['id_user']; ?>" class="form-control" required value="<?= $du['username']; ?>">
+                                      <input type="text" name="nama_lengkap" id="nama_lengkap<?= $du['id_user']; ?>" class="form-control" required value="<?= $du['nama_lengkap']; ?>">
                                     </div>
                                     <div class="form-group">
                                       <label for="id_jabatan<?= $du['id_user']; ?>">Nama Jabatan</label>

@@ -1,5 +1,7 @@
 <!-- jQuery -->
 <script src="assets/vendor/jquery/jquery.min.js"></script>
+<!-- popper -->
+<script src="assets/vendor/popper/popper.min.js"></script>
 <!-- Bootstrap 4 -->
 <script src="assets/vendor/bootstrap/js/bootstrap.min.js"></script>
 <!-- overlayScrollbars -->
@@ -20,3 +22,4 @@
 <script src="assets/js/datatables-config.js"></script>
 <script src="assets/js/fancybox-config.js"></script>
 <script src="assets/js/sweetalert2-config.js"></script>
+<script src="assets/js/popover-config.js"></script>
