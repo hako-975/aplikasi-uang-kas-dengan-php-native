@@ -1,6 +1,17 @@
 <?php 
   require 'connection.php';
   checkLogin();
+  $jml_siswa = mysqli_fetch_assoc(mysqli_query($conn, "SELECT count(id_siswa) as jml_siswa FROM siswa"));
+  $jml_siswa = $jml_siswa['jml_siswa'];
+
+  $jml_user = mysqli_fetch_assoc(mysqli_query($conn, "SELECT count(id_user) as jml_user FROM user"));
+  $jml_user = $jml_user['jml_user'];
+
+  $jml_jabatan = mysqli_fetch_assoc(mysqli_query($conn, "SELECT count(id_jabatan) as jml_jabatan FROM jabatan"));
+  $jml_jabatan = $jml_jabatan['jml_jabatan'];
+
+  $jml_uang_kas = mysqli_fetch_assoc(mysqli_query($conn, "SELECT sum(minggu_ke_1 + minggu_ke_2 + minggu_ke_3 + minggu_ke_4) as jml_uang_kas FROM uang_kas"));
+  $jml_uang_kas = $jml_uang_kas['jml_uang_kas'];
 ?>
 
 <!DOCTYPE html>
@@ -33,7 +44,46 @@
     <!-- Main content -->
     <section class="content">
       <div class="container-fluid">
-        
+        <div class="row">
+          <?php if ($_SESSION['id_user'] == '1'): ?>
+            <div class="col-lg-3">
+              <div class="card shadow">
+                <div class="card-body">
+                  <h5><i class="fas fa-fw fa-cog"></i> Jabatan</h5>
+                  <h6 class="text-muted">Jumlah Jabatan: <?= $jml_jabatan; ?></h6>
+                  <a href="jabatan.php" class="btn btn-info"><i class="fas fa-fw fa-align-justify"></i></a>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-3">
+              <div class="card shadow">
+                <div class="card-body">
+                  <h5><i class="fas fa-fw fa-users"></i> User</h5>
+                  <h6 class="text-muted">Jumlah User: <?= $jml_user; ?></h6>
+                  <a href="user.php" class="btn btn-info"><i class="fas fa-fw fa-align-justify"></i></a>
+                </div>
+              </div>
+            </div>
+          <?php endif ?>
+          <div class="col-lg-3">
+            <div class="card shadow">
+              <div class="card-body">
+                <h5><i class="fas fa-fw fa-user-tie"></i> Siswa</h5>
+                <h6 class="text-muted">Jumlah Siswa: <?= $jml_siswa; ?></h6>
+                <a href="siswa.php" class="btn btn-info"><i class="fas fa-fw fa-align-justify"></i></a>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-3">
+            <div class="card shadow">
+              <div class="card-body">
+                <h5><i class="fas fa-fw fa-dollar-sign"></i> Uang Kas</h5>
+                <h6 class="text-muted">Jumlah Uang Kas: Rp. <?= number_format($jml_uang_kas); ?></h6>
+                <a href="uang_kas.php" class="btn btn-info"><i class="fas fa-fw fa-align-justify"></i></a>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </section>
     <!-- /.content -->

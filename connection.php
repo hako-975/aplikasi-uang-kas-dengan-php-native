@@ -294,3 +294,32 @@ function tambahSiswaUangKas($data) {
 	$query = mysqli_query($conn, "INSERT INTO uang_kas VALUES ('', '$id_siswa', '$id_bulan_pembayaran', '0', '0', '0', '0')");
   	return mysqli_affected_rows($conn);
 }
+
+function addPengeluaran($data) {
+	global $conn;
+	$id_user = htmlspecialchars($_SESSION['id_user']);
+	$jumlah_pengeluaran = htmlspecialchars($data['jumlah_pengeluaran']);
+	$keterangan = htmlspecialchars($data['keterangan']);
+	$tanggal_pengeluaran = time();
+	$query = mysqli_query($conn, "INSERT INTO pengeluaran VALUES ('', '$jumlah_pengeluaran', '$keterangan', '$tanggal_pengeluaran', '$id_user')");
+  	return mysqli_affected_rows($conn);
+}
+
+function editPengeluaran($data) {
+	global $conn;
+	$id_user = htmlspecialchars($_SESSION['id_user']);
+	$id_pengeluaran = htmlspecialchars($data['id_pengeluaran']);
+	$jumlah_pengeluaran = htmlspecialchars($data['jumlah_pengeluaran']);
+	$keterangan = htmlspecialchars($data['keterangan']);
+	$tanggal_pengeluaran = time();
+	$query = mysqli_query($conn, "UPDATE pengeluaran SET jumlah_pengeluaran = '$jumlah_pengeluaran', keterangan = '$keterangan', tanggal_pengeluaran = '$tanggal_pengeluaran', id_user = '$id_user' WHERE id_pengeluaran = '$id_pengeluaran'");
+  	return mysqli_affected_rows($conn);
+}
+
+function deletePengeluaran($id) {
+	global $conn;
+	if (checkJabatan() == true) {
+		$query = mysqli_query($conn, "DELETE FROM pengeluaran WHERE id_pengeluaran = '$id'");
+	  	return mysqli_affected_rows($conn);
+	}
+}

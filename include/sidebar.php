@@ -57,6 +57,12 @@
             <p>Uang Kas</p>
           </a>
         </li>
+        <li class="nav-item">
+          <a href="pengeluaran.php" class="nav-link">
+            <i class="fas fa-sign-out-alt nav-icon"></i>
+            <p>Pengeluaran</p>
+          </a>
+        </li>
         <div class="dropdown-divider"></div>
         <li class="nav-item">
           <a href="riwayat.php" class="nav-link">

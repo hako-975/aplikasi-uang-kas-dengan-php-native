@@ -15,6 +15,8 @@
       header("Location: uang_kas.php");
     }
   }
+
+
 ?>
 
 <!DOCTYPE html>
@@ -108,12 +110,18 @@
         </div>
         <div class="row">
           <?php foreach ($bulan_pembayaran as $dbp): ?>
+            <?php 
+              $id_bulan_pembayaran = $dbp['id_bulan_pembayaran'];
+              $total_uang_kas_bulan_ini = mysqli_fetch_assoc(mysqli_query($conn, "SELECT sum(minggu_ke_1 + minggu_ke_2 + minggu_ke_3 + minggu_ke_4) as total_uang_kas_bulan_ini FROM uang_kas WHERE id_bulan_pembayaran = '$id_bulan_pembayaran'"));
+              $total_uang_kas_bulan_ini = $total_uang_kas_bulan_ini['total_uang_kas_bulan_ini'];
+            ?>
             <div class="col-lg-3">
               <div class="card shadow">
                 <div class="card-body">
                   <h5><a href="detail_bulan_pembayaran.php?id_bulan_pembayaran=<?= $dbp['id_bulan_pembayaran']; ?>" class="text-dark"><?= ucwords($dbp['nama_bulan']); ?></a></h5>
                   <h6 class="text-muted"><?= $dbp['tahun']; ?></h6>
                   <h6>Rp. <?= number_format($dbp['pembayaran_perminggu']); ?> / minggu</h6>
+                  <h6>Total Uang Kas Bulan Ini: <span class="my-2 btn btn-success">Rp. <?= number_format($total_uang_kas_bulan_ini); ?></span></h6>
                   <a href="detail_bulan_pembayaran.php?id_bulan_pembayaran=<?= $dbp['id_bulan_pembayaran']; ?>" class="btn btn-info"><i class="fas fa-fw fa-align-justify"></i></a>
                   <!-- <button type="button" data-toggle="modal" data-target="#editBulanPembayaranModal<?= $dbp['id_bulan_pembayaran']; ?>" class="btn btn-success"><i class="fas fa-fw fa-edit"></i></button> -->
                   <!-- Modal -->
@@ -159,7 +167,7 @@
                     </div>
                   </div>
                   <?php if ($_SESSION['id_jabatan'] == '1'): ?>
-                    <a href="hapus_bulan_pembayaran.php?id_bulan_pembayaran=<?= $dbp['id_bulan_pembayaran']; ?>" class="btn btn-danger btn-delete" data-nama="<?= ucwords($dbp['nama_bulan']); ?>"><i class="fas fa-fw fa-trash"></i></a>
+                    <a href="hapus_bulan_pembayaran.php?id_bulan_pembayaran=<?= $dbp['id_bulan_pembayaran']; ?>" class="btn btn-danger btn-delete" data-nama="<?= ucwords($dbp['nama_bulan']); ?> | <?= $dbp['tahun']; ?>"><i class="fas fa-fw fa-trash"></i></a>
                   <?php endif ?>
                 </div>
               </div>
