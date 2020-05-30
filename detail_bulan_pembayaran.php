@@ -79,27 +79,27 @@
                     <td><?= $i++; ?></td>
                     <td><?= ucwords(htmlspecialchars_decode($duk['nama_siswa'])); ?></td>
                     <?php if ($duk['minggu_ke_1'] == $duk['pembayaran_perminggu']): ?>
-                      <td class="text-success"><?= $duk['minggu_ke_1']; ?></td>
+                      <td class="text-success"><?= number_format($duk['minggu_ke_1']); ?></td>
                     <?php else: ?>
-                      <td class="text-danger"><?= $duk['minggu_ke_1']; ?></td>
+                      <td class="text-danger"><?= number_format($duk['minggu_ke_1']); ?></td>
                     <?php endif ?>
 
                     <?php if ($duk['minggu_ke_2'] == $duk['pembayaran_perminggu']): ?>
-                      <td class="text-success"><?= $duk['minggu_ke_2']; ?></td>
+                      <td class="text-success"><?= number_format($duk['minggu_ke_2']); ?></td>
                     <?php else: ?>
-                      <td class="text-danger"><?= $duk['minggu_ke_2']; ?></td>
+                      <td class="text-danger"><?= number_format($duk['minggu_ke_2']); ?></td>
                     <?php endif ?>
 
                     <?php if ($duk['minggu_ke_3'] == $duk['pembayaran_perminggu']): ?>
-                      <td class="text-success"><?= $duk['minggu_ke_3']; ?></td>
+                      <td class="text-success"><?= number_format($duk['minggu_ke_3']); ?></td>
                     <?php else: ?>
-                      <td class="text-danger"><?= $duk['minggu_ke_3']; ?></td>
+                      <td class="text-danger"><?= number_format($duk['minggu_ke_3']); ?></td>
                     <?php endif ?>
 
                     <?php if ($duk['minggu_ke_4'] == $duk['pembayaran_perminggu']): ?>
-                      <td class="text-success"><?= $duk['minggu_ke_4']; ?></td>
+                      <td class="text-success"><?= number_format($duk['minggu_ke_4']); ?></td>
                     <?php else: ?>
-                      <td class="text-danger"><?= $duk['minggu_ke_4']; ?></td>
+                      <td class="text-danger"><?= number_format($duk['minggu_ke_4']); ?></td>
                     <?php endif ?>
                   </tr>
                 <?php else: ?>
@@ -113,7 +113,7 @@
                         <td><a href="" data-toggle="modal" data-target="#editMingguKe1<?= $duk['id_uang_kas']; ?>" class="badge badge-success"><i class="fas fa-fw fa-check"></i> Sudah bayar</a></td>
                       <?php endif ?>
                     <?php else: ?>
-                      <td><a href="" data-toggle="modal" data-target="#editMingguKe1<?= $duk['id_uang_kas']; ?>" class="badge badge-danger"><?= $duk['minggu_ke_1']; ?></a></td>
+                      <td><a href="" data-toggle="modal" data-target="#editMingguKe1<?= $duk['id_uang_kas']; ?>" class="badge badge-danger"><?= number_format($duk['minggu_ke_1']); ?></a></td>
                     <?php endif ?>
                     <?php if ($duk['minggu_ke_1'] !== $duk['pembayaran_perminggu']): ?>
                       <td><---</td>
@@ -127,7 +127,7 @@
                         <td><a href="" data-toggle="modal" data-target="#editMingguKe2<?= $duk['id_uang_kas']; ?>" class="badge badge-success"><i class="fas fa-fw fa-check"></i> Sudah bayar</a></td>
                       <?php endif ?>
                       <?php else: ?>
-                        <td><a href="" data-toggle="modal" data-target="#editMingguKe2<?= $duk['id_uang_kas']; ?>" class="badge badge-danger"><?= $duk['minggu_ke_2']; ?></a></td>
+                        <td><a href="" data-toggle="modal" data-target="#editMingguKe2<?= $duk['id_uang_kas']; ?>" class="badge badge-danger"><?= number_format($duk['minggu_ke_2']); ?></a></td>
                       <?php endif ?>
                       <?php if ($duk['minggu_ke_2'] !== $duk['pembayaran_perminggu']): ?>
                         <td><---</td>
@@ -140,7 +140,7 @@
                             <td><a href="" data-toggle="modal" data-target="#editMingguKe3<?= $duk['id_uang_kas']; ?>" class="badge badge-success"><i class="fas fa-fw fa-check"></i> Sudah bayar</a></td>
                           <?php endif ?>
                         <?php else: ?>
-                          <td><a href="" data-toggle="modal" data-target="#editMingguKe3<?= $duk['id_uang_kas']; ?>" class="badge badge-danger"><?= $duk['minggu_ke_3']; ?></a></td>
+                          <td><a href="" data-toggle="modal" data-target="#editMingguKe3<?= $duk['id_uang_kas']; ?>" class="badge badge-danger"><?= number_format($duk['minggu_ke_3']); ?></a></td>
                         <?php endif ?>
                         <?php if ($duk['minggu_ke_3'] !== $duk['pembayaran_perminggu']): ?>
                           <td><---</td>
@@ -148,7 +148,7 @@
                           <?php if ($duk['minggu_ke_4'] == $duk['pembayaran_perminggu']): ?>
                             <td><a href="" data-toggle="modal" data-target="#editMingguKe4<?= $duk['id_uang_kas']; ?>" class="badge badge-success"><i class="fas fa-fw fa-check"></i> Sudah bayar</a></td>
                           <?php else: ?>
-                            <td><a href="" data-toggle="modal" data-target="#editMingguKe4<?= $duk['id_uang_kas']; ?>" class="badge badge-danger"><?= $duk['minggu_ke_4']; ?></a></td>
+                            <td><a href="" data-toggle="modal" data-target="#editMingguKe4<?= $duk['id_uang_kas']; ?>" class="badge badge-danger"><?= number_format($duk['minggu_ke_4']); ?></a></td>
                           <?php endif ?>
                         <?php endif ?>
                       <?php endif ?>

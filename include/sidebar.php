@@ -63,6 +63,12 @@
             <p>Pengeluaran</p>
           </a>
         </li>
+        <li class="nav-item">
+          <a href="laporan.php" class="nav-link">
+            <i class="fas fa-file nav-icon"></i>
+            <p>Laporan</p>
+          </a>
+        </li>
         <div class="dropdown-divider"></div>
         <li class="nav-item">
           <a href="riwayat.php" class="nav-link">
