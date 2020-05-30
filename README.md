@@ -26,10 +26,10 @@ Username: annisa321
 Password: 123456
 
 Fitur:
-> Hak akses
-> Mengelola Uang Kas Perbulan
-> Riwayat Pembayaran
-> Mengelola Pengeluaran
-> Riwayat Pengeluaran
-> Ganti Password
-> Dan Lainnya
+# Hak akses
+# Mengelola Uang Kas Perbulan
+# Riwayat Pembayaran
+# Mengelola Pengeluaran
+# Riwayat Pengeluaran
+# Ganti Password
+# Dan Lainnya
