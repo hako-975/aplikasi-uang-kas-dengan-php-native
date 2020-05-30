@@ -1,5 +1,10 @@
 <?php 
   $dataUser = dataUser();
+  $jml_pengeluaran = mysqli_fetch_assoc(mysqli_query($conn, "SELECT sum(jumlah_pengeluaran) as jml_pengeluaran FROM pengeluaran"));
+  $jml_pengeluaran = $jml_pengeluaran['jml_pengeluaran'];
+
+  $jml_uang_kas = mysqli_fetch_assoc(mysqli_query($conn, "SELECT sum(minggu_ke_1 + minggu_ke_2 + minggu_ke_3 + minggu_ke_4) as jml_uang_kas FROM uang_kas"));
+  $jml_uang_kas = $jml_uang_kas['jml_uang_kas'];
 ?>
 <!-- Main Sidebar Container -->
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
@@ -19,6 +24,14 @@
         </li>
         <!-- Add icons to the links using the .nav-icon class
              with font-awesome or any other icon font library -->
+        <li class="nav-item">
+          <div class="bg-success nav-link text-white">
+            <i class="nav-icon fas fa-money-bill-wave"></i>
+            <p>
+              Sisa Uang: <?= number_format($jml_uang_kas - $jml_pengeluaran); ?>
+            </p>
+          </div>
+        </li>
         <li class="nav-item has-treeview menu-open">
           <a href="index.php" class="nav-link active">
             <i class="nav-icon fas fa-tachometer-alt"></i>
