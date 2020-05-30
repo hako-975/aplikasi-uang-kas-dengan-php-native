@@ -10,6 +10,9 @@
   $jml_jabatan = mysqli_fetch_assoc(mysqli_query($conn, "SELECT count(id_jabatan) as jml_jabatan FROM jabatan"));
   $jml_jabatan = $jml_jabatan['jml_jabatan'];
 
+  $jml_pengeluaran = mysqli_fetch_assoc(mysqli_query($conn, "SELECT sum(jumlah_pengeluaran) as jml_pengeluaran FROM pengeluaran"));
+  $jml_pengeluaran = $jml_pengeluaran['jml_pengeluaran'];
+
   $jml_uang_kas = mysqli_fetch_assoc(mysqli_query($conn, "SELECT sum(minggu_ke_1 + minggu_ke_2 + minggu_ke_3 + minggu_ke_4) as jml_uang_kas FROM uang_kas"));
   $jml_uang_kas = $jml_uang_kas['jml_uang_kas'];
 ?>
@@ -45,7 +48,7 @@
     <section class="content">
       <div class="container-fluid">
         <div class="row">
-          <?php if ($_SESSION['id_user'] == '1'): ?>
+          <?php if ($_SESSION['id_jabatan'] == '1'): ?>
             <div class="col-lg-3">
               <div class="card shadow">
                 <div class="card-body">
@@ -77,8 +80,17 @@
           <div class="col-lg-3">
             <div class="card shadow">
               <div class="card-body">
-                <h5><i class="fas fa-fw fa-dollar-sign"></i> Uang Kas</h5>
-                <h6 class="text-muted">Jumlah Uang Kas: Rp. <?= number_format($jml_uang_kas); ?></h6>
+                <h5><i class="text-danger fas fa-fw fa-caret-down"></i><i class="text-danger fas fa-fw fa-dollar-sign"></i> Pengeluaran</h5>
+                <h6 class="text-muted">Jumlah Pengeluaran: Rp. <?= number_format($jml_pengeluaran); ?></h6>
+                <a href="#" class="btn btn-info"><i class="fas fa-fw fa-align-justify"></i></a>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-3">
+            <div class="card shadow">
+              <div class="card-body">
+                <h5><i class="text-success fas fa-fw fa-caret-up"></i> <i class="text-success fas fa-fw fa-dollar-sign"></i> Uang Kas</h5>
+                <h6 class="text-muted">Jumlah Uang Kas: Rp. <?= number_format($jml_uang_kas - $jml_pengeluaran); ?></h6>
                 <a href="uang_kas.php" class="btn btn-info"><i class="fas fa-fw fa-align-justify"></i></a>
               </div>
             </div>
