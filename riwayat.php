@@ -39,9 +39,9 @@
             <thead>
               <tr>
                 <th>No.</th>
-                <th>Username</th>
                 <th>Nama Siswa</th>
                 <th>Nama Bulan & Tahun</th>
+                <th>Username</th>
                 <th>Pesan</th>
                 <th>Tanggal</th>
               </tr>
@@ -51,9 +51,9 @@
               <?php foreach ($riwayat as $dr): ?>
                 <tr>
                   <td><?= $i++; ?></td>
-                  <td><?= $dr['username']; ?></td>
                   <td><?= ucwords($dr['nama_siswa']); ?></td>
                   <td><?= ucwords($dr['nama_bulan']); ?> | <?= $dr['tahun']; ?></td>
+                  <td><?= $dr['username']; ?></td>
                   <td><?= $dr['aksi']; ?></td>
                   <td><?= date('d-m-Y, H:i:s', $dr['tanggal']); ?></td>
                 </tr>

@@ -82,7 +82,7 @@
               <div class="card-body">
                 <h5><i class="text-danger fas fa-fw fa-caret-down"></i><i class="text-danger fas fa-fw fa-dollar-sign"></i> Pengeluaran</h5>
                 <h6 class="text-muted">Jumlah Pengeluaran: Rp. <?= number_format($jml_pengeluaran); ?></h6>
-                <a href="#" class="btn btn-info"><i class="fas fa-fw fa-align-justify"></i></a>
+                <a href="pengeluaran.php" class="btn btn-info"><i class="fas fa-fw fa-align-justify"></i></a>
               </div>
             </div>
           </div>
