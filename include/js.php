@@ -1,7 +1,7 @@
 <!-- jQuery -->
 <script src="assets/vendor/jquery/jquery.min.js"></script>
 <!-- popper -->
-<script src="assets/vendor/popper/popper.min.js"></script>
+<script src="assets/vendor/popper/popper-1.16.0.min.js"></script>
 <!-- Bootstrap 4 -->
 <script src="assets/vendor/bootstrap/js/bootstrap.min.js"></script>
 <!-- overlayScrollbars -->
