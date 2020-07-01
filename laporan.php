@@ -4,6 +4,7 @@
   $bulan_pembayaran = mysqli_query($conn, "SELECT * FROM bulan_pembayaran ORDER BY id_bulan_pembayaran DESC");
   if (isset($_POST['btnLaporanPemasukkan'])) {
   	$id_bulan_pembayaran = htmlspecialchars($_POST['id_bulan_pembayaran']);
+
   	$sql = mysqli_query($conn, "SELECT * FROM bulan_pembayaran INNER JOIN uang_kas ON bulan_pembayaran.id_bulan_pembayaran = uang_kas.id_bulan_pembayaran INNER JOIN siswa ON uang_kas.id_siswa = siswa.id_siswa WHERE bulan_pembayaran.id_bulan_pembayaran = '$id_bulan_pembayaran'");
   	$fetch_sql = mysqli_fetch_assoc($sql);
   }
@@ -26,6 +27,9 @@
   	@media print {
 	  	.not-printed {
 	  		display: none;
+	  	}
+	  	.total {
+	  		color: black !important;
 	  	}
   	}
   </style>
@@ -61,6 +65,8 @@
         			<div class="form-group">
         				<label for="id_bulan_pembayaran">Pilih Bulan Pembayaran</label>
 	        			<select name="id_bulan_pembayaran" id="id_bulan_pembayaran" class="form-control">
+	        				<option value="<?= $fetch_sql['id_bulan_pembayaran']; ?>"><?= ucwords($fetch_sql['nama_bulan']); ?> | <?= $fetch_sql['tahun']; ?> | Rp. <?= number_format($fetch_sql['pembayaran_perminggu']); ?></option>
+	        				<option disabled>----</option>
 		        			<?php foreach ($bulan_pembayaran as $dbp): ?>
 		        				<option value="<?= $dbp['id_bulan_pembayaran']; ?>"><?= ucwords($dbp['nama_bulan']); ?> | <?= $dbp['tahun']; ?> | Rp. <?= number_format($dbp['pembayaran_perminggu']); ?></option>
 		        			<?php endforeach ?>
@@ -78,13 +84,21 @@
         				<div class="col-lg">
         					<div class="form-group">
 		        				<label for="dari_tanggal">Dari Tanggal</label>
-		        				<input type="date" name="dari_tanggal" class="form-control" id="dari_tanggal" value="<?= date('Y-m-01'); ?>">
+		        				<?php if (isset($_POST['btnLaporanPengeluaran'])): ?>
+			        				<input type="date" name="dari_tanggal" class="form-control" id="dari_tanggal" value="<?= $_POST['dari_tanggal']; ?>">
+	        					<?php else: ?>
+			        				<input type="date" name="dari_tanggal" class="form-control" id="dari_tanggal" value="<?= date('Y-m-01'); ?>">
+		        				<?php endif ?>
 		        			</div>
         				</div>
         				<div class="col-lg">
         					<div class="form-group">
 		        				<label for="sampai_tanggal">Sampai Tanggal</label>
-		        				<input type="date" name="sampai_tanggal" class="form-control" id="sampai_tanggal" value="<?= date('Y-m-d'); ?>">
+		        				<?php if (isset($_POST['btnLaporanPengeluaran'])): ?>
+			        				<input type="date" name="sampai_tanggal" class="form-control" id="sampai_tanggal" value="<?= $_POST['sampai_tanggal']; ?>">
+	        					<?php else: ?>
+			        				<input type="date" name="sampai_tanggal" class="form-control" id="sampai_tanggal" value="<?= date('Y-m-d'); ?>">
+		        				<?php endif ?>
 		        			</div>
         				</div>
         			</div>
@@ -149,11 +163,19 @@
 	        		</div>
 	        	</div>
 	        </div>
+	        <div class="row mx-1 mb-1 mt-0">
+    			<div class="col-lg-4">
+    				<?php 
+    					$jml_uang_kas = mysqli_fetch_assoc(mysqli_query($conn, "SELECT *, sum(minggu_ke_1 + minggu_ke_2 + minggu_ke_3 + minggu_ke_4) as jml_uang_kas FROM uang_kas INNER JOIN bulan_pembayaran ON bulan_pembayaran.id_bulan_pembayaran = uang_kas.id_bulan_pembayaran WHERE bulan_pembayaran.id_bulan_pembayaran = '$id_bulan_pembayaran'"));
+    				?>
+		    		<div class="p-3 rounded bg-success total">Total Pemasukkan: Rp. <?= number_format($jml_uang_kas['jml_uang_kas']); ?></div>
+    			</div>
+    		</div>
         <?php endif ?>
         <?php if (isset($_POST['btnLaporanPengeluaran'])): ?>
         	<hr class="not-printed">
         	<button onclick="return print()" class="not-printed btn btn-success"><i class="fas fa-fw fa-print"></i> Print</button>
-        	<div class="row m-1">
+        	<div class="row m-1 mb-0">
 	        	<div class="col-lg m-1">
 	        		<h2 class="text-center mb-3 mt-2">Laporan Pengeluaran</h2>
 	        		<h3 class="text-left mb-3">Laporan Dari Tanggal: <?= $dari_tanggal_date; ?> Sampai Tanggal: <?= $sampai_tanggal_date; ?></h3>
@@ -162,7 +184,7 @@
 	        				<thead>
 	        					<tr>
 	        						<th>No.</th>
-	        						<th>Jumlah Pengeluaran</th>
+	        						<th>Pengeluaran</th>
 	        						<th>Keterangan</th>
 	        						<th>Tanggal Pengeluaran</th>
 	        						<th>Username</th>
@@ -170,6 +192,7 @@
 	        				</thead>
 	        				<tbody>
 	        					<?php $i = 1; ?>
+	        					<?php $total_pengeluaran = '0'; ?>
 	        					<?php foreach ($sql as $ds): ?>
 	        						<tr>
 	        							<td><?= $i++; ?></td>
@@ -178,12 +201,20 @@
 	        							<td><?= date('d-m-Y, H:i:s', $ds['tanggal_pengeluaran']); ?></td>
 	        							<td><?= $ds['username']; ?></td>
 	        						</tr>
+	        						<?php 
+	        							$total_pengeluaran += $ds['jumlah_pengeluaran'];
+	        						?>
 	        					<?php endforeach ?>
 	        				</tbody>
 	        			</table>
 	        		</div>
 	        	</div>
 	        </div>
+    		<div class="row mx-1 mb-1 mt-0">
+    			<div class="col-lg-4">
+		    		<div class="p-3 rounded bg-success total">Total Pengeluaran: Rp. <?= number_format($total_pengeluaran); ?></div>
+    			</div>
+    		</div>
         <?php endif ?>
       </div>
     </section>
