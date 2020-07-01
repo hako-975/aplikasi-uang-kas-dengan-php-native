@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 30 Bulan Mei 2020 pada 16.34
+-- Waktu pembuatan: 01 Jul 2020 pada 20.00
 -- Versi server: 10.4.11-MariaDB
 -- Versi PHP: 7.4.3
 
@@ -41,7 +41,8 @@ CREATE TABLE `bulan_pembayaran` (
 
 INSERT INTO `bulan_pembayaran` (`id_bulan_pembayaran`, `nama_bulan`, `tahun`, `pembayaran_perminggu`) VALUES
 (1, 'januari', 2021, 5000),
-(2, 'februari', 2021, 4000);
+(2, 'februari', 2021, 4000),
+(3, 'juli', 2020, 5000);
 
 -- --------------------------------------------------------
 
@@ -82,7 +83,10 @@ CREATE TABLE `pengeluaran` (
 --
 
 INSERT INTO `pengeluaran` (`id_pengeluaran`, `jumlah_pengeluaran`, `keterangan`, `tanggal_pengeluaran`, `id_user`) VALUES
-(3, 10000, 'pengharum ruangan 1x', 1590848481, 2);
+(3, 12000, 'pengharum ruangan 1 Pcs', 1593626363, 1),
+(4, 14000, 'Sapu 2 Pcs', 1593626300, 1),
+(7, 9000, 'kain pel 1 pcs', 1593625725, 1),
+(8, 12000, 'Penghapus papan tulis 1Pcs', 1593626393, 1);
 
 -- --------------------------------------------------------
 
@@ -113,7 +117,39 @@ INSERT INTO `riwayat` (`id_riwayat`, `id_user`, `id_uang_kas`, `aksi`, `tanggal`
 (8, 1, 7, 'telah mengubah pembayaran minggu ke-1 dari Rp. 0 menjadi Rp. 3,000', 1590248824),
 (9, 1, 8, 'telah mengubah pembayaran minggu ke-1 dari Rp. 0 menjadi Rp. 1,000', 1590248827),
 (10, 2, 1, 'telah mengubah pembayaran minggu ke-1 dari Rp. 3,000 menjadi Rp. 5,000', 1590248990),
-(11, 1, 1, 'telah mengubah pembayaran minggu ke-2 dari Rp. 0 menjadi Rp. 5,000', 1590332508);
+(11, 1, 1, 'telah mengubah pembayaran minggu ke-2 dari Rp. 0 menjadi Rp. 5,000', 1590332508),
+(12, 1, 1, 'telah mengubah pembayaran minggu ke-3 dari Rp. 0 menjadi Rp. 2,000', 1591296094),
+(13, 1, 1, 'telah mengubah pembayaran minggu ke-3 dari Rp. 2,000 menjadi Rp. 5,000', 1591296102),
+(14, 1, 1, 'telah mengubah pembayaran minggu ke-4 dari Rp. 0 menjadi Rp. 5,000', 1591296107),
+(15, 1, 13, 'telah mengubah pembayaran minggu ke-1 dari Rp. 0 menjadi Rp. 5,000', 1591296909),
+(16, 1, 9, 'telah mengubah pembayaran minggu ke-1 dari Rp. 0 menjadi Rp. 3,000', 1591296918),
+(17, 1, 13, 'telah mengubah pembayaran minggu ke-2 dari Rp. 0 menjadi Rp. 3,000', 1591296924),
+(18, 1, 13, 'telah mengubah pembayaran minggu ke-2 dari Rp. 3,000 menjadi Rp. 0', 1591296938),
+(19, 1, 13, 'telah mengubah pembayaran minggu ke-1 dari Rp. 5,000 menjadi Rp. 4,000', 1591296943),
+(20, 1, 9, 'telah mengubah pembayaran minggu ke-1 dari Rp. 3,000 menjadi Rp. 5,000', 1593623076),
+(21, 1, 9, 'telah mengubah pembayaran minggu ke-2 dari Rp. 0 menjadi Rp. 5,000', 1593623099),
+(22, 2, 9, 'telah mengubah pembayaran minggu ke-2 dari Rp. 5,000 menjadi Rp. 0', 1593623193);
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `riwayat_pengeluaran`
+--
+
+CREATE TABLE `riwayat_pengeluaran` (
+  `id_riwayat_pengeluaran` int(11) NOT NULL,
+  `id_user` int(11) NOT NULL,
+  `aksi` text NOT NULL,
+  `tanggal` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data untuk tabel `riwayat_pengeluaran`
+--
+
+INSERT INTO `riwayat_pengeluaran` (`id_riwayat_pengeluaran`, `id_user`, `aksi`, `tanggal`) VALUES
+(1, 1, 'telah mengubah pengeluaran pengharum ruangan 1 Pcs dari biaya Rp. 10,000 menjadi Rp. 12,000', 1593626363),
+(2, 1, 'telah menambahkan pengeluaran Penghapus papan tulis 1Pcs dengan biaya Rp. 12,000', 1593626393);
 
 -- --------------------------------------------------------
 
@@ -137,7 +173,8 @@ INSERT INTO `siswa` (`id_siswa`, `nama_siswa`, `jenis_kelamin`, `no_telepon`, `e
 (1, 'Andri Firman Saputra', 'pria', '087808675313', 'andri.firman.saputra.56@gmail.com'),
 (2, 'Abdul Jabbar', 'pria', '085753152511', 'abdjbbr2@gmail.com'),
 (3, 'Annisa Azzahra', 'wanita', '089612351520', 'annisazahra12@gmail.com'),
-(4, 'Dewa Guska', 'pria', '085712526395', 'dewaweb12@gmail.com');
+(4, 'Dewa Guska', 'pria', '085712526395', 'dewaweb12@gmail.com'),
+(6, 'Lia', 'wanita', '082114523555', 'lia21@gmail.com');
 
 -- --------------------------------------------------------
 
@@ -160,14 +197,19 @@ CREATE TABLE `uang_kas` (
 --
 
 INSERT INTO `uang_kas` (`id_uang_kas`, `id_siswa`, `id_bulan_pembayaran`, `minggu_ke_1`, `minggu_ke_2`, `minggu_ke_3`, `minggu_ke_4`) VALUES
-(1, 1, 1, 5000, 5000, 0, 0),
+(1, 1, 1, 5000, 5000, 5000, 5000),
 (2, 2, 1, 2000, 0, 0, 0),
 (3, 3, 1, 5000, 0, 0, 0),
 (4, 4, 1, 1000, 0, 0, 0),
 (5, 1, 2, 4000, 4000, 0, 0),
 (6, 2, 2, 3000, 0, 0, 0),
 (7, 3, 2, 3000, 0, 0, 0),
-(8, 4, 2, 1000, 0, 0, 0);
+(8, 4, 2, 1000, 0, 0, 0),
+(9, 1, 3, 5000, 0, 0, 0),
+(10, 2, 3, 0, 0, 0, 0),
+(11, 3, 3, 0, 0, 0, 0),
+(12, 4, 3, 0, 0, 0, 0),
+(13, 6, 3, 4000, 0, 0, 0);
 
 -- --------------------------------------------------------
 
@@ -224,6 +266,13 @@ ALTER TABLE `riwayat`
   ADD KEY `id_uang_kas` (`id_uang_kas`);
 
 --
+-- Indeks untuk tabel `riwayat_pengeluaran`
+--
+ALTER TABLE `riwayat_pengeluaran`
+  ADD PRIMARY KEY (`id_riwayat_pengeluaran`),
+  ADD KEY `id_user` (`id_user`);
+
+--
 -- Indeks untuk tabel `siswa`
 --
 ALTER TABLE `siswa`
@@ -252,7 +301,7 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT untuk tabel `bulan_pembayaran`
 --
 ALTER TABLE `bulan_pembayaran`
-  MODIFY `id_bulan_pembayaran` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_bulan_pembayaran` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT untuk tabel `jabatan`
@@ -264,25 +313,31 @@ ALTER TABLE `jabatan`
 -- AUTO_INCREMENT untuk tabel `pengeluaran`
 --
 ALTER TABLE `pengeluaran`
-  MODIFY `id_pengeluaran` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id_pengeluaran` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT untuk tabel `riwayat`
 --
 ALTER TABLE `riwayat`
-  MODIFY `id_riwayat` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id_riwayat` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+
+--
+-- AUTO_INCREMENT untuk tabel `riwayat_pengeluaran`
+--
+ALTER TABLE `riwayat_pengeluaran`
+  MODIFY `id_riwayat_pengeluaran` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT untuk tabel `siswa`
 --
 ALTER TABLE `siswa`
-  MODIFY `id_siswa` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id_siswa` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT untuk tabel `uang_kas`
 --
 ALTER TABLE `uang_kas`
-  MODIFY `id_uang_kas` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id_uang_kas` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT untuk tabel `user`

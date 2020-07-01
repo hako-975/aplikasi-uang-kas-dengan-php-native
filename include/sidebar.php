@@ -89,6 +89,12 @@
             <p>Riwayat Uang Kas</p>
           </a>
         </li>
+        <li class="nav-item">
+          <a href="riwayat_pengeluaran.php" class="nav-link">
+            <i class="fas fa-stopwatch nav-icon"></i>
+            <p>Riwayat Pengeluaran</p>
+          </a>
+        </li>
       </ul>
     </nav>
     <!-- /.sidebar-menu -->

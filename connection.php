@@ -225,6 +225,12 @@ function riwayat($id_user, $id_uang_kas, $aksi) {
 	return mysqli_query($conn, "INSERT INTO riwayat VALUES ('', '$id_user', '$id_uang_kas', '$aksi', '$tanggal')");
 }
 
+function riwayatPengeluaran($id_user, $aksi) {
+	global $conn;
+	$tanggal = time();
+	return mysqli_query($conn, "INSERT INTO riwayat_pengeluaran VALUES ('', '$id_user', '$aksi', '$tanggal')");
+}
+
 function editPembayaranUangKas($data) {
 	global $conn;
 	$id_uang_kas = htmlspecialchars($data['id_uang_kas']);
@@ -302,6 +308,7 @@ function addPengeluaran($data) {
 	$keterangan = htmlspecialchars($data['keterangan']);
 	$tanggal_pengeluaran = time();
 	$query = mysqli_query($conn, "INSERT INTO pengeluaran VALUES ('', '$jumlah_pengeluaran', '$keterangan', '$tanggal_pengeluaran', '$id_user')");
+	riwayatPengeluaran($id_user, "telah menambahkan pengeluaran " . $keterangan . " dengan biaya Rp. " . number_format($jumlah_pengeluaran));
   	return mysqli_affected_rows($conn);
 }
 
@@ -309,10 +316,12 @@ function editPengeluaran($data) {
 	global $conn;
 	$id_user = htmlspecialchars($_SESSION['id_user']);
 	$id_pengeluaran = htmlspecialchars($data['id_pengeluaran']);
+	$fetch_sql = mysqli_fetch_assoc(mysqli_query($conn, "SELECT * FROM pengeluaran WHERE id_pengeluaran = '$id_pengeluaran'"));
 	$jumlah_pengeluaran = htmlspecialchars($data['jumlah_pengeluaran']);
 	$keterangan = htmlspecialchars($data['keterangan']);
 	$tanggal_pengeluaran = time();
 	$query = mysqli_query($conn, "UPDATE pengeluaran SET jumlah_pengeluaran = '$jumlah_pengeluaran', keterangan = '$keterangan', tanggal_pengeluaran = '$tanggal_pengeluaran', id_user = '$id_user' WHERE id_pengeluaran = '$id_pengeluaran'");
+	riwayatPengeluaran($id_user, "telah mengubah pengeluaran " . $keterangan . " dari biaya Rp. " . number_format($fetch_sql['jumlah_pengeluaran']) . " menjadi Rp. " . number_format($jumlah_pengeluaran));
   	return mysqli_affected_rows($conn);
 }
 
