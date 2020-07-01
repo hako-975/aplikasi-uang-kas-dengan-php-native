@@ -65,8 +65,10 @@
         			<div class="form-group">
         				<label for="id_bulan_pembayaran">Pilih Bulan Pembayaran</label>
 	        			<select name="id_bulan_pembayaran" id="id_bulan_pembayaran" class="form-control">
-	        				<option value="<?= $fetch_sql['id_bulan_pembayaran']; ?>"><?= ucwords($fetch_sql['nama_bulan']); ?> | <?= $fetch_sql['tahun']; ?> | Rp. <?= number_format($fetch_sql['pembayaran_perminggu']); ?></option>
-	        				<option disabled>----</option>
+	        				<?php if (isset($_POST['btnLaporanPemasukkan'])): ?>
+	        					<option value="<?= $fetch_sql['id_bulan_pembayaran']; ?>"><?= ucwords($fetch_sql['nama_bulan']); ?> | <?= $fetch_sql['tahun']; ?> | Rp. <?= number_format($fetch_sql['pembayaran_perminggu']); ?></option>
+		        				<option disabled>----</option>
+	        				<?php endif ?>
 		        			<?php foreach ($bulan_pembayaran as $dbp): ?>
 		        				<option value="<?= $dbp['id_bulan_pembayaran']; ?>"><?= ucwords($dbp['nama_bulan']); ?> | <?= $dbp['tahun']; ?> | Rp. <?= number_format($dbp['pembayaran_perminggu']); ?></option>
 		        			<?php endforeach ?>
