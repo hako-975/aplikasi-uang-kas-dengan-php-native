@@ -24,7 +24,7 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm">
-            <h1 class="m-0 text-dark">Riwayat_pengeluaran Uang Kas</h1>
+            <h1 class="m-0 text-dark">Riwayat Pengeluaran Uang Kas</h1>
           </div><!-- /.col -->
         </div><!-- /.row -->
       </div><!-- /.container-fluid -->
