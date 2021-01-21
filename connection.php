@@ -271,6 +271,7 @@ function deleteBulanPembayaran($id) {
 	global $conn;
 	if (checkJabatan() == true) {
 		$query = mysqli_query($conn, "DELETE FROM bulan_pembayaran WHERE id_bulan_pembayaran = '$id'");
+		$query = mysqli_query($conn, "DELETE FROM uang_kas WHERE uang_kas.id_bulan_pembayaran = '$id'");
 	  	return mysqli_affected_rows($conn);
 	}
 }
