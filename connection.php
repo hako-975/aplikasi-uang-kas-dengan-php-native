@@ -256,7 +256,12 @@ function editPembayaranUangKas($data) {
 	} elseif (isset($_POST['minggu_ke_4'])) {
 		$uang_sebelum = htmlspecialchars($data['uang_sebelum']);
 		$minggu_ke_4 = htmlspecialchars($_POST['minggu_ke_4']);
-		$query = mysqli_query($conn, "UPDATE uang_kas SET minggu_ke_4 = '$minggu_ke_4' WHERE id_uang_kas = '$id_uang_kas'");
+		$pembayaran_perminggu = htmlspecialchars($data['pembayaran_perminggu']);
+		if ($minggu_ke_4 == $pembayaran_perminggu) {
+			$query = mysqli_query($conn, "UPDATE uang_kas SET minggu_ke_4 = '$minggu_ke_4', status_lunas = '1' WHERE id_uang_kas = '$id_uang_kas'");
+		} else {
+			$query = mysqli_query($conn, "UPDATE uang_kas SET minggu_ke_4 = '$minggu_ke_4' WHERE id_uang_kas = '$id_uang_kas'");
+		}
   		riwayat($id_user, $id_uang_kas, "telah mengubah pembayaran minggu ke-4 dari Rp. " . number_format($uang_sebelum) . " menjadi Rp. " . number_format($minggu_ke_4));
   		return mysqli_affected_rows($conn);
 	}

@@ -78,7 +78,7 @@
                           <div class="col-lg">
                             <div class="form-group">
                               <label for="tahun">Tahun</label>
-                              <input type="number" required name="tahun" value="<?= date('Y') + 1; ?>" class="form-control">
+                              <input type="number" required name="tahun" value="<?= date('Y'); ?>" class="form-control">
                             </div>
                           </div>
                         </div>

@@ -6,6 +6,18 @@
   $siswa = mysqli_query($conn, "SELECT * FROM siswa ORDER BY nama_siswa ASC");
   $siswa_baru = mysqli_query($conn, "SELECT * FROM siswa WHERE id_siswa NOT IN (SELECT id_siswa FROM uang_kas) ORDER BY nama_siswa ASC");
   $uang_kas = mysqli_query($conn, "SELECT * FROM uang_kas INNER JOIN siswa ON uang_kas.id_siswa = siswa.id_siswa INNER JOIN bulan_pembayaran ON uang_kas.id_bulan_pembayaran = bulan_pembayaran.id_bulan_pembayaran WHERE uang_kas.id_bulan_pembayaran = '$id_bulan_pembayaran' ORDER BY nama_siswa ASC");
+  
+  $bulan_pembayaran_pertama = mysqli_fetch_assoc(mysqli_query($conn, "SELECT * FROM bulan_pembayaran ORDER BY id_bulan_pembayaran ASC LIMIT 1")); 
+  $id_bulan_pembayaran_pertama = $bulan_pembayaran_pertama['id_bulan_pembayaran'];
+
+  $id_bulan_pembayaran_sebelum = $id_bulan_pembayaran - 1;
+  if ($id_bulan_pembayaran_sebelum <= 0) {
+    $id_bulan_pembayaran_sebelum = 1;
+  }
+
+  if ($id_bulan_pembayaran != $id_bulan_pembayaran_pertama) {
+    $uang_kas_bulan_sebelum = mysqli_query($conn, "SELECT * FROM uang_kas INNER JOIN siswa ON uang_kas.id_siswa = siswa.id_siswa INNER JOIN bulan_pembayaran ON uang_kas.id_bulan_pembayaran = bulan_pembayaran.id_bulan_pembayaran WHERE uang_kas.id_bulan_pembayaran = $id_bulan_pembayaran_sebelum ORDER BY nama_siswa ASC");
+  }
 
   if (isset($_POST['btnEditPembayaranUangKas'])) {
     if (editPembayaranUangKas($_POST) > 0) {
@@ -74,6 +86,15 @@
             <tbody>
               <?php $i = 1; ?>
               <?php foreach ($uang_kas as $duk): ?>
+                <?php 
+                  if ($id_bulan_pembayaran != $id_bulan_pembayaran_pertama) {
+                    $data_bulan_sebelum = mysqli_fetch_assoc($uang_kas_bulan_sebelum);
+                    if ($data_bulan_sebelum['minggu_ke_4']) {
+                      mysqli_query($conn, "UPDATE uang_kas SET status_lunas = '1' WHERE minggu_ke_4 != '0'");
+                    }
+                  }
+                ?>
+
                 <?php if ($_SESSION['id_jabatan'] == '3'): ?>
                   <tr>
                     <td><?= $i++; ?></td>
@@ -103,7 +124,11 @@
                     <?php endif ?>
                   </tr>
                 <?php else: ?>
-                  <tr>
+                  <?php if ($id_bulan_pembayaran != $id_bulan_pembayaran_pertama AND $data_bulan_sebelum['status_lunas'] == '0'): ?>
+                    <tr class="bg-danger">
+                  <?php else: ?>
+                    <tr>
+                  <?php endif ?>
                     <td><?= $i++; ?></td>
                     <td><?= $duk['nama_siswa']; ?></td>
                     <?php if ($duk['minggu_ke_1'] == $duk['pembayaran_perminggu']): ?>
@@ -117,7 +142,15 @@
                         <td><a href="" data-toggle="modal" data-target="#editMingguKe1<?= $duk['id_uang_kas']; ?>" class="badge badge-success"><i class="fas fa-fw fa-check"></i> Sudah bayar</a></td>
                       <?php endif ?>
                     <?php else: ?>
-                      <td><a href="" data-toggle="modal" data-target="#editMingguKe1<?= $duk['id_uang_kas']; ?>" class="badge badge-danger"><?= number_format($duk['minggu_ke_1']); ?></a></td>
+                      <td>
+                        <?php if ($id_bulan_pembayaran != $id_bulan_pembayaran_pertama AND $data_bulan_sebelum['status_lunas'] == '0'): ?>
+                          <button type="button" class="badge badge-danger" data-container="body" data-toggle="popover" data-placement="top" data-content="Tidak bisa melakukan pembayaran, jika bulan pembayaran sebelumnya belum lunas.">
+                            <i class="fas fa-fw fa-times"></i> 
+                          </button>
+                        <?php else: ?>
+                          <a href="" data-toggle="modal" data-target="#editMingguKe1<?= $duk['id_uang_kas']; ?>" class="badge badge-danger"><?= number_format($duk['minggu_ke_1']); ?></a>
+                        <?php endif ?>
+                      </td>
                     <?php endif ?>
                     <?php if ($duk['minggu_ke_1'] !== $duk['pembayaran_perminggu']): ?>
                       <td><---</td>
@@ -244,6 +277,7 @@
                     <div class="modal-dialog" role="document">
                       <form method="post">
                         <input type="hidden" name="id_uang_kas" value="<?= $duk['id_uang_kas']; ?>">
+                        <input type="hidden" name="pembayaran_perminggu" value="<?= $duk['pembayaran_perminggu']; ?>">
                         <div class="modal-content">
                           <div class="modal-header">
                             <h5 class="modal-title" id="editMingguKe4Label<?= $dbp['id_bulan_pembayaran']; ?>">Ubah Minggu Ke-4 : <?= $duk['nama_siswa']; ?></h5>
