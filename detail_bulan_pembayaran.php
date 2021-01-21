@@ -87,10 +87,11 @@
               <?php $i = 1; ?>
               <?php foreach ($uang_kas as $duk): ?>
                 <?php 
+                  $pembayaran_perminggu = $duk['pembayaran_perminggu'];
                   if ($id_bulan_pembayaran != $id_bulan_pembayaran_pertama) {
                     $data_bulan_sebelum = mysqli_fetch_assoc($uang_kas_bulan_sebelum);
                     if ($data_bulan_sebelum['minggu_ke_4']) {
-                      mysqli_query($conn, "UPDATE uang_kas SET status_lunas = '1' WHERE minggu_ke_4 != '0'");
+                      mysqli_query($conn, "UPDATE uang_kas SET status_lunas = '1' WHERE minggu_ke_4 = '$pembayaran_perminggu'");
                     }
                   }
                 ?>
