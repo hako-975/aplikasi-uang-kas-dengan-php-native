@@ -49,7 +49,7 @@
       <div class="container-fluid">
         <div class="row">
           <?php if ($_SESSION['id_jabatan'] == '1'): ?>
-            <div class="col-lg-3">
+            <div class="col-lg-4">
               <div class="card shadow">
                 <div class="card-body">
                   <h5><i class="fas fa-fw fa-cog"></i> Jabatan</h5>
@@ -58,7 +58,7 @@
                 </div>
               </div>
             </div>
-            <div class="col-lg-3">
+            <div class="col-lg-4">
               <div class="card shadow">
                 <div class="card-body">
                   <h5><i class="fas fa-fw fa-users"></i> User</h5>
@@ -68,7 +68,7 @@
               </div>
             </div>
           <?php endif ?>
-          <div class="col-lg-3">
+          <div class="col-lg-4">
             <div class="card shadow">
               <div class="card-body">
                 <h5><i class="fas fa-fw fa-user-tie"></i> Siswa</h5>
@@ -77,21 +77,21 @@
               </div>
             </div>
           </div>
-          <div class="col-lg-3">
-            <div class="card shadow">
-              <div class="card-body">
-                <h5><i class="text-danger fas fa-fw fa-caret-down"></i><i class="text-danger fas fa-fw fa-dollar-sign"></i> Pengeluaran</h5>
-                <h6 class="text-muted">Jumlah Pengeluaran: Rp. <?= number_format($jml_pengeluaran); ?></h6>
-                <a href="pengeluaran.php" class="btn btn-info"><i class="fas fa-fw fa-align-justify"></i></a>
-              </div>
-            </div>
-          </div>
-          <div class="col-lg-3">
+          <div class="col-lg-4">
             <div class="card shadow">
               <div class="card-body">
                 <h5><i class="text-success fas fa-fw fa-caret-up"></i> <i class="text-success fas fa-fw fa-dollar-sign"></i> Uang Kas</h5>
                 <h6 class="text-muted">Jumlah Uang Kas: Rp. <?= number_format($jml_uang_kas - $jml_pengeluaran); ?></h6>
                 <a href="uang_kas.php" class="btn btn-info"><i class="fas fa-fw fa-align-justify"></i></a>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-4">
+            <div class="card shadow">
+              <div class="card-body">
+                <h5><i class="text-danger fas fa-fw fa-caret-down"></i><i class="text-danger fas fa-fw fa-dollar-sign"></i> Pengeluaran</h5>
+                <h6 class="text-muted">Jumlah Pengeluaran: Rp. <?= number_format($jml_pengeluaran); ?></h6>
+                <a href="pengeluaran.php" class="btn btn-info"><i class="fas fa-fw fa-align-justify"></i></a>
               </div>
             </div>
           </div>
