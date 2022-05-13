@@ -303,7 +303,7 @@ function tambahSiswaUangKas($data) {
 	global $conn;
 	$id_siswa = htmlspecialchars($data['id_siswa']);
 	$id_bulan_pembayaran = htmlspecialchars($data['id_bulan_pembayaran']);
-	$query = mysqli_query($conn, "INSERT INTO uang_kas VALUES ('', '$id_siswa', '$id_bulan_pembayaran', '0', '0', '0', '0')");
+	$query = mysqli_query($conn, "INSERT INTO uang_kas VALUES ('', '$id_siswa', '$id_bulan_pembayaran', '0', '0', '0', '0', '0')");
   	return mysqli_affected_rows($conn);
 }
 

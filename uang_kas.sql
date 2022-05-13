@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.0.4
+-- version 5.1.3
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 06 Feb 2021 pada 13.23
--- Versi server: 10.4.17-MariaDB
--- Versi PHP: 7.4.13
+-- Waktu pembuatan: 13 Bulan Mei 2022 pada 16.50
+-- Versi server: 10.4.22-MariaDB
+-- Versi PHP: 7.4.28
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -39,8 +39,8 @@ CREATE TABLE `bulan_pembayaran` (
 --
 
 INSERT INTO `bulan_pembayaran` (`id_bulan_pembayaran`, `nama_bulan`, `tahun`, `pembayaran_perminggu`) VALUES
-(1, 'januari', 2021, 5000),
-(2, 'februari', 2021, 5000);
+(1, 'mei', 2022, 5000),
+(2, 'juni', 2022, 5000);
 
 -- --------------------------------------------------------
 
@@ -117,7 +117,19 @@ INSERT INTO `riwayat` (`id_riwayat`, `id_user`, `id_uang_kas`, `aksi`, `tanggal`
 (12, 1, 4, 'telah mengubah pembayaran minggu ke-1 dari Rp. 500 menjadi Rp. 5,000', 1611256526),
 (13, 1, 5, 'telah mengubah pembayaran minggu ke-1 dari Rp. 0 menjadi Rp. 5,000', 1611256530),
 (14, 1, 5, 'telah mengubah pembayaran minggu ke-2 dari Rp. 0 menjadi Rp. 5,000', 1611256534),
-(15, 1, 2, 'telah mengubah pembayaran minggu ke-4 dari Rp. 4,000 menjadi Rp. 3,000', 1611257026);
+(15, 1, 2, 'telah mengubah pembayaran minggu ke-4 dari Rp. 4,000 menjadi Rp. 3,000', 1611257026),
+(16, 1, 2, 'telah mengubah pembayaran minggu ke-4 dari Rp. 3,000 menjadi Rp. 5,000', 1652453172),
+(17, 1, 3, 'telah mengubah pembayaran minggu ke-3 dari Rp. 0 menjadi Rp. 5,000', 1652453181),
+(18, 1, 3, 'telah mengubah pembayaran minggu ke-4 dari Rp. 0 menjadi Rp. 5,000', 1652453187),
+(19, 1, 4, 'telah mengubah pembayaran minggu ke-2 dari Rp. 0 menjadi Rp. 5,000', 1652453192),
+(20, 1, 4, 'telah mengubah pembayaran minggu ke-3 dari Rp. 0 menjadi Rp. 5,000', 1652453196),
+(21, 1, 4, 'telah mengubah pembayaran minggu ke-4 dari Rp. 0 menjadi Rp. 5,000', 1652453201),
+(22, 1, 5, 'telah mengubah pembayaran minggu ke-3 dari Rp. 0 menjadi Rp. 5,000', 1652453205),
+(23, 1, 5, 'telah mengubah pembayaran minggu ke-4 dari Rp. 0 menjadi Rp. 5,000', 1652453209),
+(24, 1, 11, 'telah mengubah pembayaran minggu ke-1 dari Rp. 0 menjadi Rp. 5,000', 1652453353),
+(25, 1, 11, 'telah mengubah pembayaran minggu ke-2 dari Rp. 0 menjadi Rp. 5,000', 1652453358),
+(26, 1, 11, 'telah mengubah pembayaran minggu ke-3 dari Rp. 0 menjadi Rp. 5,000', 1652453362),
+(27, 1, 11, 'telah mengubah pembayaran minggu ke-4 dari Rp. 0 menjadi Rp. 5,000', 1652453366);
 
 -- --------------------------------------------------------
 
@@ -162,10 +174,11 @@ CREATE TABLE `siswa` (
 
 INSERT INTO `siswa` (`id_siswa`, `nama_siswa`, `jenis_kelamin`, `no_telepon`, `email`) VALUES
 (1, 'Andri Firman Saputra', 'pria', '087808675313', 'andri.firman.saputra.56@gmail.com'),
-(2, 'Abdul Jabbar', 'pria', '085753152511', 'abdjbbr2@gmail.com'),
-(3, 'Annisa Azzahra', 'wanita', '089612351520', 'annisazahra12@gmail.com'),
-(4, 'Dewa Guska', 'pria', '085712526395', 'dewaweb12@gmail.com'),
-(6, 'Lia', 'wanita', '082114523555', 'lia21@gmail.com');
+(2, 'Aisyah Mawar Kusuma Salsabila', 'wanita', '085753152511', 'aisyahmawar69@gmail.com'),
+(3, 'Bima Darmaja Suryatama', 'pria', '089612351520', 'bimadarmaja12@gmail.com'),
+(4, 'Dzaki Rozzan', 'pria', '085712526395', 'zakiojan1@gmail.com'),
+(6, 'Fariz Septiawan', 'pria', '082114523555', 'farizseptiawan8@gmail.com'),
+(7, 'Rangga Ariansyah', 'pria', '0851377382722', 'ranggaariansyah77@gmail.com');
 
 -- --------------------------------------------------------
 
@@ -190,15 +203,16 @@ CREATE TABLE `uang_kas` (
 
 INSERT INTO `uang_kas` (`id_uang_kas`, `id_siswa`, `id_bulan_pembayaran`, `minggu_ke_1`, `minggu_ke_2`, `minggu_ke_3`, `minggu_ke_4`, `status_lunas`) VALUES
 (1, 1, 1, 5000, 5000, 5000, 5000, 1),
-(2, 2, 1, 5000, 5000, 5000, 3000, 0),
-(3, 3, 1, 5000, 5000, 0, 0, 0),
-(4, 4, 1, 5000, 0, 0, 0, 0),
-(5, 6, 1, 5000, 5000, 0, 0, 0),
+(2, 2, 1, 5000, 5000, 5000, 5000, 1),
+(3, 3, 1, 5000, 5000, 5000, 5000, 1),
+(4, 4, 1, 5000, 5000, 5000, 5000, 1),
+(5, 6, 1, 5000, 5000, 5000, 5000, 1),
 (6, 1, 2, 0, 0, 0, 0, 0),
 (7, 2, 2, 0, 0, 0, 0, 0),
 (8, 3, 2, 0, 0, 0, 0, 0),
 (9, 4, 2, 0, 0, 0, 0, 0),
-(10, 6, 2, 0, 0, 0, 0, 0);
+(10, 6, 2, 0, 0, 0, 0, 0),
+(11, 7, 1, 5000, 5000, 5000, 5000, 1);
 
 -- --------------------------------------------------------
 
@@ -308,7 +322,7 @@ ALTER TABLE `pengeluaran`
 -- AUTO_INCREMENT untuk tabel `riwayat`
 --
 ALTER TABLE `riwayat`
-  MODIFY `id_riwayat` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id_riwayat` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
 
 --
 -- AUTO_INCREMENT untuk tabel `riwayat_pengeluaran`
@@ -320,13 +334,13 @@ ALTER TABLE `riwayat_pengeluaran`
 -- AUTO_INCREMENT untuk tabel `siswa`
 --
 ALTER TABLE `siswa`
-  MODIFY `id_siswa` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id_siswa` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT untuk tabel `uang_kas`
 --
 ALTER TABLE `uang_kas`
-  MODIFY `id_uang_kas` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id_uang_kas` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT untuk tabel `user`
